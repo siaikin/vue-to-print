@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "tabWidth": 2,
+  "printWidth": 100,
+  "trailingComma": "none",
+  "semi": true,
+  // 已通过 .gitattributes 配置换行符兼容性. 无需再配置 endOfLine.
+  "endOfLine": "auto"
+}

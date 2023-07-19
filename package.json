@@ -1,0 +1,62 @@
+{
+  "name": "vue-to-print",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "run-s type-check build-only type-gen",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "type-gen": "vue-tsc --declaration --emitDeclarationOnly --declarationDir dist",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "prepare": "husky install"
+  },
+  "types": "dist/src/main.d.ts",
+  "module": "dist/index.js",
+  "main": "dist/index.cjs",
+  "files": [
+    "dist",
+    "typings/global.d.ts"
+  ],
+  "peerDependencies": {
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@tsconfig/node18": "^2.0.1",
+    "@types/jsdom": "^21.1.1",
+    "@types/node": "^18.16.17",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
+    "@vue/test-utils": "^2.3.2",
+    "@vue/tsconfig": "^0.4.0",
+    "eslint": "^8.39.0",
+    "eslint-plugin-vue": "^9.11.0",
+    "happy-dom": "^10.5.1",
+    "jsdom": "^22.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.8",
+    "typescript": "~5.0.4",
+    "vite": "^4.4.4",
+    "vitepress": "^1.0.0-beta.5",
+    "vitest": "^0.32.0",
+    "vue-tsc": "^1.6.5"
+  },
+  "lint-staged": {
+    "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "eslint --cache --fix",
+    "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts,md,html,css}": [
+      "prettier --write"
+    ],
+    "*.src/": "prettier --write"
+  }
+}
