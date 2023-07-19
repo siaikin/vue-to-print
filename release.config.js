@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
@@ -17,5 +17,5 @@ export default {
       }
     ]
   ],
-  repositoryUrl: "http://home.siaikin.website:20017/nbicc/common-components.git"
+  repositoryUrl: "https://github.com/siaikin/vue-to-print.git"
 };
