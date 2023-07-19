@@ -1,4 +1,4 @@
-GitHub Copilot: # API
+# API
 
 ## VueToPrint
 

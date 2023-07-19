@@ -1,4 +1,4 @@
-GitHub Copilot: # 入门指南
+# 入门指南
 
 ## 安装
 

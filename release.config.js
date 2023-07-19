@@ -1,21 +1,10 @@
-export default {
+// eslint-disable-next-line no-undef
+module.exports = {
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    [
-      "@semantic-release/changelog",
-      {
-        changelogFile: "CHANGELOG.md"
-      }
-    ],
     "@semantic-release/npm",
-    [
-      "@semantic-release/git",
-      {
-        // 默认: ['CHANGELOG.md', 'package.json', 'package-lock.json', 'npm-shrinkwrap.json']
-        // assets: []
-      }
-    ]
+    "@semantic-release/github"
   ],
-  repositoryUrl: "http://home.siaikin.website:20017/nbicc/common-components.git"
+  repositoryUrl: "https://github.com/siaikin/vue-to-print.git"
 };
