@@ -27,7 +27,7 @@
     "typings/global.d.ts"
   ],
   "peerDependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
