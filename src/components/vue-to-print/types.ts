@@ -1,4 +1,10 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Slot } from "vue";
+import type {
+  ComponentPublicInstance,
+  ExtractPropTypes,
+  ExtractPublicPropTypes,
+  PropType,
+  Slot
+} from "vue";
 
 export const vueToPrintProps = () =>
   ({
@@ -14,7 +20,7 @@ export const vueToPrintProps = () =>
      */
     content: {
       type: Function as PropType<() => HTMLElement>,
-      default: null
+      required: true
     },
     /**
      *  Copy styles over into print window. default: true
@@ -121,7 +127,15 @@ export const vueToPrintProps = () =>
     }
   } as const);
 
-export type VueToPrintProps = ExtractPropTypes<ReturnType<typeof vueToPrintProps>>;
+/**
+ * 内部使用的 props 类型定义.
+ */
+export type InnerVueToPrintProps = ExtractPropTypes<ReturnType<typeof vueToPrintProps>>;
+
+/**
+ * 组件对外暴露的 props 类型定义.
+ */
+export type VueToPrintProps = ExtractPublicPropTypes<ReturnType<typeof vueToPrintProps>>;
 
 // export type VueToPrintEmits = {
 //   /**
