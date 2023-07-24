@@ -535,7 +535,3 @@ export function useVueToPrint(props: VueToPrintProps) {
     handlePrint: handleClick
   };
 }
-
-useVueToPrint({
-  content: () => 1 as any
-});
