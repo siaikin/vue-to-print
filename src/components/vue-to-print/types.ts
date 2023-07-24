@@ -1,10 +1,4 @@
-import type {
-  ComponentPublicInstance,
-  ExtractPropTypes,
-  ExtractPublicPropTypes,
-  PropType,
-  Slot
-} from "vue";
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Slot } from "vue";
 
 export const vueToPrintProps = () =>
   ({
@@ -135,7 +129,9 @@ export type InnerVueToPrintProps = ExtractPropTypes<ReturnType<typeof vueToPrint
 /**
  * 组件对外暴露的 props 类型定义.
  */
-export type VueToPrintProps = ExtractPublicPropTypes<ReturnType<typeof vueToPrintProps>>;
+// export type VueToPrintProps = ExtractPublicPropTypes<ReturnType<typeof vueToPrintProps>>;
+export type VueToPrintProps = Partial<Omit<InnerVueToPrintProps, "content">> &
+  Pick<InnerVueToPrintProps, "content">;
 
 // export type VueToPrintEmits = {
 //   /**
