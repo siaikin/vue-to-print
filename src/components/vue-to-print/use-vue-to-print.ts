@@ -422,7 +422,7 @@ export function useVueToPrint(props: VueToPrintProps) {
                   );
                 }
 
-                newHeadEl.setAttribute("id", `react-to-print-${i}`);
+                newHeadEl.setAttribute("id", `vue-to-print-${i}`);
                 if (nonce) {
                   newHeadEl.setAttribute("nonce", nonce);
                 }
