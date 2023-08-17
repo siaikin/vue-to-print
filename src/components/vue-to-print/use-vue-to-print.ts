@@ -183,7 +183,7 @@ export function useVueToPrint(props: VueToPrintProps) {
     const clonedContentNodes = contentNodes.cloneNode(true);
     const isText = clonedContentNodes instanceof Text;
 
-    const globalStyleLinkNodes = document.querySelectorAll("link[rel='stylesheet']");
+    const globalStyleLinkNodes = document.querySelectorAll("link[rel~='stylesheet']");
     const renderComponentImgNodes = isText
       ? []
       : (clonedContentNodes as Element).querySelectorAll("img");
@@ -391,7 +391,7 @@ export function useVueToPrint(props: VueToPrintProps) {
         }
 
         if (copyStyles) {
-          const headEls = document.querySelectorAll("style, link[rel='stylesheet']");
+          const headEls = document.querySelectorAll("style, link[rel~='stylesheet']");
           for (let i = 0, headElsLen = headEls.length; i < headElsLen; ++i) {
             const node = headEls[i];
 
