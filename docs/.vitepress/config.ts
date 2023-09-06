@@ -87,6 +87,13 @@ export default defineConfig({
       }
     }
   },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => tag.startsWith("ion-")
+      }
+    }
+  },
   vite: {
     plugins: [
       //@ts-ignore
