@@ -1,17 +1,16 @@
 let isVueToPrintCustomElementRegistered = false;
 
-class VueToPrintCustomElement extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
-
 /**
  * 注册自定义元素 vue-to-print-custom-element, 作为自定义元素的根节点
  */
 export function registryVueToPrintCustomElement() {
   if (isVueToPrintCustomElementRegistered) return;
 
+  class VueToPrintCustomElement extends HTMLElement {
+    constructor() {
+      super();
+    }
+  }
   customElements.define("vue-to-print-custom-element", VueToPrintCustomElement);
   isVueToPrintCustomElementRegistered = true;
 }

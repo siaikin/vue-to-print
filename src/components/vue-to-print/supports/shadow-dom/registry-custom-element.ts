@@ -1,18 +1,17 @@
 let isVueToPrintShadowDomRegistered = false;
 
-class VueToPrintShadowDom extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-  }
-}
-
 /**
  * 注册自定义元素 vue-to-print-shadow-dom, 作为 Shadow DOM 的根节点
  */
 export function registryVueToPrintShadowDom() {
   if (isVueToPrintShadowDomRegistered) return;
 
+  class VueToPrintShadowDom extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
+  }
   customElements.define("vue-to-print-shadow-dom", VueToPrintShadowDom);
   isVueToPrintShadowDomRegistered = true;
 }
