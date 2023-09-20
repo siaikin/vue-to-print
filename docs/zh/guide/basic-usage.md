@@ -1,8 +1,22 @@
+---
+head:
+  - - script
+    - type: module
+      src: https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js
+  - - script
+    - nomodule: ""
+      src: https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js
+  - - script
+    - rel: stylesheet
+      href: https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css
+---
+
 # 基本使用
 
 <script setup>
 import PrintByComponent from "../../examples/PrintByComponent.vue"; 
 import PrintByHook from "../../examples/PrintByHook.vue"; 
+import PrintShadowDomByHook from "../../examples/shadow-dom/PrintShadowDomByHook.vue";
 </script>
 
 ## 使用组件进行打印
@@ -25,4 +39,18 @@ import PrintByHook from "../../examples/PrintByHook.vue";
 ::: code-group
 <<< @/examples/PrintByHook.vue#script{typescript} [script setup ts]
 <<< @/examples/PrintByHook.vue#template{html} [template]
+:::
+
+
+## 打印 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
+
+这个示例将打印来自 [Ionic](https://ionicframework.com/) 的 `Web Components` 组件.
+
+<PrintShadowDomByHook />
+
+::: details Click to view code
+
+::: code-group
+<<< @/examples/shadow-dom/PrintShadowDomByHook.vue#script{typescript} [script setup ts]
+<<< @/examples/shadow-dom/PrintShadowDomByHook.vue#template{html} [template]
 :::

@@ -41,7 +41,9 @@ import PrintShadowDomByHook from "../examples/shadow-dom/PrintShadowDomByHook.vu
 <<< @/examples/PrintByHook.vue#template{html} [template]
 :::
 
-## Print _Shadow DOM_ using hook
+## Print [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
+
+This example will print `Web Components` components from [Ionic](https://ionicframework.com/).
 
 <PrintShadowDomByHook />
 
