@@ -1,4 +1,6 @@
 import { type Font, type VueToPrintProps } from "./types";
+import * as ShadowDomSupport from "./supports/shadow-dom";
+import { deepCloneNode } from "./clone-node";
 
 /**
  * The default props in Vue are set within vueToPrintProps too.
@@ -140,7 +142,7 @@ export function useVueToPrint(props: VueToPrintProps) {
     }
   };
 
-  const handlePrint = () => {
+  const handlePrint = async () => {
     const { bodyClass, content, copyStyles, fonts, pageStyle, nonce } = props;
 
     const contentEl = content();
@@ -180,24 +182,14 @@ export function useVueToPrint(props: VueToPrintProps) {
     }
 
     // React components can return a bare string as a valid JSX response
-    const clonedContentNodes = contentNodes.cloneNode(true);
-    const isText = clonedContentNodes instanceof Text;
+    const clonedContentNodes = await deepCloneNode(contentNodes);
+    // const isText = clonedContentNodes instanceof Text;
 
     const globalStyleLinkNodes = document.querySelectorAll("link[rel~='stylesheet']");
-    const renderComponentImgNodes = isText
-      ? []
-      : (clonedContentNodes as Element).querySelectorAll("img");
-    const renderComponentVideoNodes = isText
-      ? []
-      : (clonedContentNodes as Element).querySelectorAll("video");
 
     const numFonts = fonts ? fonts.length : 0;
 
-    numResourcesToLoad =
-      globalStyleLinkNodes.length +
-      renderComponentImgNodes.length +
-      renderComponentVideoNodes.length +
-      numFonts;
+    numResourcesToLoad = globalStyleLinkNodes.length + numFonts;
     resourcesLoaded = [];
     resourcesErrored = [];
 
@@ -226,7 +218,7 @@ export function useVueToPrint(props: VueToPrintProps) {
       }
     };
 
-    printWindow.onload = () => {
+    printWindow.onload = async () => {
       // Some agents, such as IE11 and Enzyme (as of 2 Jun 2020) continuously call the
       // `onload` callback. This ensures that it is only called once.
       printWindow.onload = null;
@@ -283,111 +275,6 @@ export function useVueToPrint(props: VueToPrintProps) {
 
         if (bodyClass) {
           domDoc.body.classList.add(...bodyClass.split(" "));
-        }
-
-        if (!isText) {
-          // Copy canvases
-          // NOTE: must use data from `contentNodes` here as the canvass elements in
-          // `clonedContentNodes` will not have been redrawn properly yet
-          const srcCanvasEls = isText ? [] : (contentNodes as Element).querySelectorAll("canvas");
-          const targetCanvasEls = domDoc.querySelectorAll("canvas");
-
-          for (let i = 0; i < srcCanvasEls.length; ++i) {
-            const sourceCanvas = srcCanvasEls[i];
-
-            const targetCanvas = targetCanvasEls[i];
-            const targetCanvasContext = targetCanvas.getContext("2d");
-
-            if (targetCanvasContext) {
-              targetCanvasContext.drawImage(sourceCanvas, 0, 0);
-            }
-          }
-
-          // Pre-load images
-          for (let i = 0; i < renderComponentImgNodes.length; i++) {
-            const imgNode = renderComponentImgNodes[i];
-            const imgSrc = imgNode.getAttribute("src");
-
-            if (!imgSrc) {
-              markLoaded(imgNode, [
-                'Found an <img> tag with an empty "src" attribute. This prevents pre-loading it. The <img> is:',
-                imgNode
-              ]);
-            } else {
-              // https://stackoverflow.com/questions/10240110/how-do-you-cache-an-image-in-javascript
-              const img = new Image();
-              img.onload = () => markLoaded(imgNode);
-              img.onerror = (_event, _source, _lineno, _colno, error) =>
-                markLoaded(imgNode, ["Error loading <img>", imgNode, "Error", error]);
-              img.src = imgSrc;
-            }
-          }
-
-          // Pre-load videos
-          for (let i = 0; i < renderComponentVideoNodes.length; i++) {
-            const videoNode = renderComponentVideoNodes[i];
-            videoNode.preload = "auto"; // Hint to the browser that it should load this resource
-
-            const videoPoster = videoNode.getAttribute("poster");
-            if (videoPoster) {
-              // If the video has a poster, pre-load the poster image
-              // https://stackoverflow.com/questions/10240110/how-do-you-cache-an-image-in-javascript
-              const img = new Image();
-              img.onload = () => markLoaded(videoNode);
-              img.onerror = (_event, _source, _lineno, _colno, error) =>
-                markLoaded(videoNode, [
-                  "Error loading video poster",
-                  videoPoster,
-                  "for video",
-                  videoNode,
-                  "Error:",
-                  error
-                ]);
-              img.src = videoPoster;
-            } else {
-              if (videoNode.readyState >= 2) {
-                // Check if the video has already loaded a frame
-                markLoaded(videoNode);
-              } else {
-                videoNode.onloadeddata = () => markLoaded(videoNode);
-
-                // TODO: why do `onabort` and `onstalled` seem to fire all the time even if there is no issue?
-                // videoNode.onabort = () => markLoaded(videoNode, ["Loading video aborted", videoNode]);
-                videoNode.onerror = (_event, _source, _lineno, _colno, error) =>
-                  markLoaded(videoNode, ["Error loading video", videoNode, "Error", error]);
-                // videoNode.onemptied = () => markLoaded(videoNode, ["Loading video emptied, skipping", videoNode]);
-                videoNode.onstalled = () =>
-                  markLoaded(videoNode, ["Loading video stalled, skipping", videoNode]);
-              }
-            }
-          }
-
-          // Copy input values
-          // This covers most input types, though some need additional work (further down)
-          const inputSelector = "input";
-          const originalInputs = (contentNodes as HTMLElement).querySelectorAll(inputSelector);
-          const copiedInputs = domDoc.querySelectorAll(inputSelector);
-          for (let i = 0; i < originalInputs.length; i++) {
-            copiedInputs[i].value = originalInputs[i].value;
-          }
-
-          // Copy checkbox, radio checks
-          const checkedSelector = "input[type=checkbox],input[type=radio]";
-          const originalCRs = (contentNodes as HTMLElement).querySelectorAll(checkedSelector);
-          const copiedCRs = domDoc.querySelectorAll(checkedSelector);
-          for (let i = 0; i < originalCRs.length; i++) {
-            (copiedCRs[i] as HTMLInputElement).checked = (
-              originalCRs[i] as HTMLInputElement
-            ).checked;
-          }
-
-          // Copy select states
-          const selectSelector = "select";
-          const originalSelects = (contentNodes as HTMLElement).querySelectorAll(selectSelector);
-          const copiedSelects = domDoc.querySelectorAll(selectSelector);
-          for (let i = 0; i < originalSelects.length; i++) {
-            copiedSelects[i].value = originalSelects[i].value;
-          }
         }
 
         if (copyStyles) {
@@ -493,6 +380,8 @@ export function useVueToPrint(props: VueToPrintProps) {
           }
         }
       }
+
+      ShadowDomSupport.retrieveStyleSheets(printWindow);
 
       if (numResourcesToLoad === 0 || !copyStyles) {
         triggerPrint(printWindow);
