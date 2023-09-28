@@ -23,3 +23,6 @@ VueToPrint aims to be as consistent as possible with ReactToPrint so that you ca
 ## Thanks
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
 > Thank JetBrains for providing an [open-source license](https://jb.gg/OpenSourceSupport), which allows me to use such an excellent IDE.
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsiaikin%2Fvue-to-print.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsiaikin%2Fvue-to-print?ref=badge_large&issueType=license)
