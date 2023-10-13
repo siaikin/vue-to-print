@@ -21,13 +21,17 @@ export default defineConfig({
       formats: ["es", "cjs"]
     },
     rollupOptions: {
-      external: ["vue"]
+      external: [
+        "vue",
+        // https://github.com/vueuse/vue-demi/issues/152#issuecomment-1175681274
+        "vue-demi"
+      ]
     }
   },
   optimizeDeps: {
     exclude: [
       // https://github.com/vueuse/vue-demi#usage
-      'vue-demi'
+      "vue-demi"
     ]
   }
 });
