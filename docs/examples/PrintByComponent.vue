@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // #region script
 import { VueToPrint } from "vue-to-print";
-import { reactive, ref } from "vue";
+import { reactive, ref } from "vue-demi";
 import ComponentToPrint from "./ComponentToPrint.vue";
 
 const componentRef = ref();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // #region script
 import { useVueToPrint } from "vue-to-print";
-import { reactive, ref } from "vue";
+import { reactive, ref } from "vue-demi";
 import ShadowDomToPrint from "./ShadowDomToPrint.vue";
 
 const componentRef = ref();

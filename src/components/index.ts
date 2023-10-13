@@ -1,6 +1,6 @@
 import * as Components from "./components";
-import type { App } from "vue";
-import type { Component, Plugin } from "vue";
+import type { App } from "vue-demi";
+import type { Component, Plugin } from "vue-demi";
 
 export const install = function (app: App) {
   const keys = Object.keys(Components);

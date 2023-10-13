@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { cloneVNode, defineComponent } from "vue";
+import { cloneVNode, defineComponent } from "vue-demi";
 import { vueToPrintProps } from "./types";
 import { useVueToPrint } from "./use-vue-to-print";
 

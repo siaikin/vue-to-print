@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from "vue";
+import { onMounted, ref, toRefs } from "vue-demi";
 import image from "../img.png";
 
 import "../example.css";

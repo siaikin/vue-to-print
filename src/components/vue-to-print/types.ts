@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Slot } from "vue";
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Slot } from "vue-demi";
 
 export const vueToPrintProps = () =>
   ({
