@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { cloneVNode, defineComponent } from "vue";
+import { cloneVNode, defineComponent, toRefs } from "vue";
 import { vueToPrintProps } from "./types";
 import { useVueToPrint } from "./use-vue-to-print";
 
@@ -7,7 +7,7 @@ export default defineComponent({
   name: "VueToPrint",
   props: vueToPrintProps(),
   setup(props, { slots, expose }) {
-    const { handlePrint } = useVueToPrint(props);
+    const { handlePrint } = useVueToPrint(toRefs(props));
 
     expose({ handlePrint });
     return () => {

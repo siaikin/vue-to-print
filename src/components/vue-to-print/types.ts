@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Slot } from "vue";
+import type { ComponentPublicInstance, ExtractPropTypes, MaybeRefOrGetter, PropType, Slot } from "vue";
 
 export const vueToPrintProps = () =>
   ({
@@ -13,7 +13,7 @@ export const vueToPrintProps = () =>
      *  Content to be printed
      */
     content: {
-      type: Function as PropType<() => HTMLElement>,
+      type: Object as PropType<HTMLElement>,
       required: true
     },
     /**
@@ -127,11 +127,32 @@ export const vueToPrintProps = () =>
 export type InnerVueToPrintProps = ExtractPropTypes<ReturnType<typeof vueToPrintProps>>;
 
 /**
+ * @see {@link vueToPrintProps}
+ */
+export interface UseVueToPrintProps {
+  bodyClass: MaybeRefOrGetter<string>;
+  content: MaybeRefOrGetter<HTMLElement>;
+  copyStyles: MaybeRefOrGetter<boolean>;
+  documentTitle: MaybeRefOrGetter<string>;
+  fonts: MaybeRefOrGetter<Font[]>;
+  onAfterPrint: MaybeRefOrGetter<() => void>;
+  onBeforeGetContent: MaybeRefOrGetter<() => void | Promise<void>>;
+  onBeforePrint: MaybeRefOrGetter<() => void | Promise<void>>;
+  onPrintError: MaybeRefOrGetter<(errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print", error: Error) => void>;
+  pageStyle: MaybeRefOrGetter<string | PropertyFunction<string>>;
+  print: MaybeRefOrGetter<(target: HTMLIFrameElement) => Promise<void>>;
+  removeAfterPrint: MaybeRefOrGetter<boolean>;
+  suppressErrors: MaybeRefOrGetter<boolean>;
+  nonce: MaybeRefOrGetter<string>;
+}
+
+export type PublicUseVueToPrintProps = Partial<Omit<UseVueToPrintProps, "content">> & Pick<UseVueToPrintProps, "content">;
+
+/**
  * 组件对外暴露的 props 类型定义.
  */
 // export type VueToPrintProps = ExtractPublicPropTypes<ReturnType<typeof vueToPrintProps>>;
-export type VueToPrintProps = Partial<Omit<InnerVueToPrintProps, "content">> &
-  Pick<InnerVueToPrintProps, "content">;
+// export type VueToPrintProps = Partial<Omit<InnerVueToPrintProps, "content">> & Pick<InnerVueToPrintProps, "content">;
 
 // export type VueToPrintEmits = {
 //   /**
@@ -161,7 +182,7 @@ export type VueToPrintSlots = {
   trigger: Slot;
 };
 
-export type VueToPrintInstance = ComponentPublicInstance<VueToPrintProps, VueToPrintExpose>;
+export type VueToPrintInstance = ComponentPublicInstance<InnerVueToPrintProps, VueToPrintExpose>;
 
 // https://developer.mozilla.org/en-US/docs/Web/API/FontFace/FontFace
 export type Font = {

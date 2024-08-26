@@ -1,6 +1,7 @@
-import { type Font, type VueToPrintProps } from "./types";
+import { type Font, type PublicUseVueToPrintProps, type UseVueToPrintProps } from "./types";
 import * as ShadowDomSupport from "./supports/shadow-dom";
 import { deepCloneNode } from "./clone-node";
+import { toValue } from "vue";
 
 /**
  * The default props in Vue are set within vueToPrintProps too.
@@ -26,7 +27,7 @@ const defaultProps = {
   suppressErrors: false
 };
 
-export function useVueToPrint(props: VueToPrintProps) {
+export function useVueToPrint(props: PublicUseVueToPrintProps) {
   props = { ...defaultProps, ...props };
 
   let numResourcesToLoad = 0;
@@ -34,7 +35,10 @@ export function useVueToPrint(props: VueToPrintProps) {
   let resourcesErrored: (Element | Font | FontFace)[] = [];
 
   const startPrint = (target: HTMLIFrameElement) => {
-    const { onAfterPrint, onPrintError, print, documentTitle } = props;
+    const onAfterPrint = toValue(props.onAfterPrint);
+    const onPrintError = toValue(props.onPrintError);
+    const print = toValue(props.print);
+    const documentTitle = toValue(props.documentTitle);
 
     // Some browsers such as Safari don't always behave well without this timeout
     setTimeout(() => {
@@ -101,7 +105,8 @@ export function useVueToPrint(props: VueToPrintProps) {
   };
 
   const triggerPrint = (target: HTMLIFrameElement) => {
-    const { onBeforePrint, onPrintError } = props;
+    const onBeforePrint = toValue(props.onBeforePrint);
+    const onPrintError = toValue(props.onPrintError);
 
     if (onBeforePrint) {
       const onBeforePrintOutput = onBeforePrint();
@@ -124,7 +129,8 @@ export function useVueToPrint(props: VueToPrintProps) {
   };
 
   const handleClick = () => {
-    const { onBeforeGetContent, onPrintError } = props;
+    const onBeforeGetContent = toValue(props.onBeforeGetContent);
+    const onPrintError = toValue(props.onPrintError);
 
     if (onBeforeGetContent) {
       const onBeforeGetContentOutput = onBeforeGetContent();
@@ -143,9 +149,15 @@ export function useVueToPrint(props: VueToPrintProps) {
   };
 
   const handlePrint = async () => {
-    const { bodyClass, content, copyStyles, fonts, pageStyle, nonce } = props;
+    // const { bodyClass, content, copyStyles, fonts, pageStyle, nonce } = props;
+    const bodyClass = toValue(props.bodyClass);
+    const content = toValue(props.content);
+    const copyStyles = toValue(props.copyStyles);
+    const fonts = toValue(props.fonts);
+    const pageStyle = toValue(props.pageStyle);
+    const nonce = toValue(props.nonce);
 
-    const contentEl = content();
+    const contentEl = content;
 
     if (contentEl === undefined) {
       logMessages([
