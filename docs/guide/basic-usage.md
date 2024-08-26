@@ -19,6 +19,18 @@ import PrintByHook from "../examples/PrintByHook.vue";
 import PrintShadowDomByHook from "../examples/shadow-dom/PrintShadowDomByHook.vue";
 </script>
 
+## Print using hook (recommended)
+
+<PrintByHook />
+
+::: details Click to view code
+
+::: code-group
+<<< @/examples/PrintByHook.vue#template{html} [template]
+<<< @/examples/PrintByHook.vue#script{typescript} [script setup ts]
+<<< @/examples/PrintByHook.vue{vue} [all]
+:::
+
 ## Print using a component
 
 <PrintByComponent />
@@ -26,19 +38,9 @@ import PrintShadowDomByHook from "../examples/shadow-dom/PrintShadowDomByHook.vu
 ::: details Click to view code
 
 ::: code-group
-<<< @/examples/PrintByComponent.vue#script{typescript} [script setup ts]
 <<< @/examples/PrintByComponent.vue#template{html} [template]
-:::
-
-## Print using hook
-
-<PrintByHook />
-
-::: details Click to view code
-
-::: code-group
-<<< @/examples/PrintByHook.vue#script{typescript} [script setup ts]
-<<< @/examples/PrintByHook.vue#template{html} [template]
+<<< @/examples/PrintByComponent.vue#script{typescript} [script setup ts]
+<<< @/examples/PrintByComponent.vue{vue} [all]
 :::
 
 ## Print [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
@@ -50,6 +52,7 @@ This example will print `Web Components` components from [Ionic](https://ionicfr
 ::: details Click to view code
 
 ::: code-group
-<<< @/examples/shadow-dom/PrintShadowDomByHook.vue#script{typescript} [script setup ts]
 <<< @/examples/shadow-dom/PrintShadowDomByHook.vue#template{html} [template]
+<<< @/examples/shadow-dom/PrintShadowDomByHook.vue#script{typescript} [script setup ts]
+<<< @/examples/shadow-dom/PrintShadowDomByHook.vue{vue} [all]
 :::

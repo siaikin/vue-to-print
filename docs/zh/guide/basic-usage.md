@@ -19,6 +19,18 @@ import PrintByHook from "../../examples/PrintByHook.vue";
 import PrintShadowDomByHook from "../../examples/shadow-dom/PrintShadowDomByHook.vue";
 </script>
 
+## 使用 hook 进行打印 (推荐)
+
+<PrintByHook />
+
+::: details 点击查看代码
+
+::: code-group
+<<< @/examples/PrintByHook.vue#template{html} [template]
+<<< @/examples/PrintByHook.vue#script{typescript} [script setup ts]
+<<< @/examples/PrintByHook.vue{vue} [all]
+:::
+
 ## 使用组件进行打印
 
 <PrintByComponent />
@@ -26,21 +38,10 @@ import PrintShadowDomByHook from "../../examples/shadow-dom/PrintShadowDomByHook
 ::: details 点击查看代码
 
 ::: code-group
-<<< @/examples/PrintByComponent.vue#script{typescript} [script setup ts]
 <<< @/examples/PrintByComponent.vue#template{html} [template]
+<<< @/examples/PrintByComponent.vue#script{typescript} [script setup ts]
+<<< @/examples/PrintByComponent.vue{vue} [all]
 :::
-
-## 使用 hook 进行打印
-
-<PrintByHook />
-
-::: details 点击查看代码
-
-::: code-group
-<<< @/examples/PrintByHook.vue#script{typescript} [script setup ts]
-<<< @/examples/PrintByHook.vue#template{html} [template]
-:::
-
 
 ## 打印 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
 
@@ -51,6 +52,7 @@ import PrintShadowDomByHook from "../../examples/shadow-dom/PrintShadowDomByHook
 ::: details Click to view code
 
 ::: code-group
-<<< @/examples/shadow-dom/PrintShadowDomByHook.vue#script{typescript} [script setup ts]
 <<< @/examples/shadow-dom/PrintShadowDomByHook.vue#template{html} [template]
+<<< @/examples/shadow-dom/PrintShadowDomByHook.vue#script{typescript} [script setup ts]
+<<< @/examples/shadow-dom/PrintShadowDomByHook.vue{vue} [all]
 :::

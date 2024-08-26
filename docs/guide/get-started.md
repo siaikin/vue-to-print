@@ -12,7 +12,7 @@
 $ npm install vue-to-print --save
 ```
 
-```shell
+```shell [pnpm]
 $ pnpm add vue-to-print
 ```
 

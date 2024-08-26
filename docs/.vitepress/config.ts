@@ -63,7 +63,7 @@ export default defineConfig({
             ]
           },
           {
-            text: "Usage",
+            text: "用法",
             items: [
               { text: "基本用法", link: "/zh/guide/basic-usage" },
               // { text: "Advanced Usage", link: "/guide/advanced-usage" },
