@@ -7,16 +7,13 @@ import ComponentToPrint from "./ComponentToPrint.vue";
 const componentRef = ref();
 const state = reactive({ text: "old boring text" });
 
-const getComponentToPrint = () => {
-  return componentRef.value;
-};
 // #endregion script
 </script>
 
 // #region template
 <template>
   <vue-to-print
-    :content="getComponentToPrint"
+    :content="componentRef"
     document-title="AwesomeFileName"
     remove-after-print
   >
