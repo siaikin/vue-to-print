@@ -20,6 +20,10 @@ VueToPrint aims to be as consistent as possible with ReactToPrint so that you ca
 
 - [Online Documentation](https://vue-to-print.netlify.app/)
 
+### Example
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/vitejs-vite-32bxkk?file=src%2Fcomponents%2FComponentToPrint.vue)
+
 ## Thanks
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
 > Thank JetBrains for providing an [open-source license](https://jb.gg/OpenSourceSupport), which allows me to use such an excellent IDE.
