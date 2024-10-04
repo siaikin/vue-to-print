@@ -21,3 +21,12 @@ $ yarn add vue-to-print
 ```
 
 :::
+
+## Online Example
+
+<a href="https://stackblitz.com/edit/vitejs-vite-32bxkk?file=src%2Fcomponents%2FComponentToPrint.vue">
+  <img
+    alt="Open in StackBlitz"
+    src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
+  />
+</a>
