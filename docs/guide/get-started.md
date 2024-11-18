@@ -1,10 +1,10 @@
 # Getting Started
 
-## Installation
-
-### Prerequisites
+## Prerequisites
 
 - [Vue.js](https://vuejs.org/) 3.x
+
+## Installation
 
 ::: code-group
 
@@ -21,6 +21,32 @@ $ yarn add vue-to-print
 ```
 
 :::
+
+## Usage
+
+You can use `vue-to-print` by combining the Composition API ([`useVueToPrint`](#print-using-hook-recommended)).
+
+The only required parameter is `content`, which is a `ref` pointing to the HTML element you want to print.
+
+```vue {7}
+<script setup lang="ts">
+import { useVueToPrint } from "vue-to-print";
+import { ref } from "vue";
+
+const componentRef = ref();
+const { handlePrint } = useVueToPrint({
+  content: componentRef,
+  documentTitle: "AwesomeFileName",
+});
+</script>
+
+<template>
+  <button @click="handlePrint">Print</button>
+  <div ref="componentRef">
+    <h1>Hello, world!</h1>
+  </div>
+</template>
+```
 
 ## Online Example
 

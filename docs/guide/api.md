@@ -5,9 +5,9 @@
 ### Props
 
 |           Name            | Type                                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| :-----------------------: | :----------------------------------------------------------------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :-----------------------: |:-------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       **`content`**       | `HTMLElement, ComponentPublicInstance`                                   | A DOM element to print.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |     **`bodyClass?`**      | `string`                                                                 | One or more class names to pass to the print window, separated by spaces                                                                                                                                                                                                                                                                                                                                                              |
-|       **`content`**       | `function`                                                               | A DOM element to print.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |     **`copyStyles?`**     | `boolean`                                                                | Copy all `<style>` and `<link type="stylesheet" />` tags from `<head>` inside the parent window into the print window. (default: `true`)                                                                                                                                                                                                                                                                                              |
 |   **`documentTitle?`**    | `string`                                                                 | Set the title for printing when saving as a file                                                                                                                                                                                                                                                                                                                                                                                      |
 |       **`fonts?`**        | `{ family: string, source: string; weight?: string; style?: string; }[]` | You may optionally provide a list of fonts which will be loaded into the printing iframe. This is useful if you are using custom fonts                                                                                                                                                                                                                                                                                                |
@@ -30,25 +30,51 @@
 
 ## useVueToPrint Hook
 
+### example
+
+```vue {7}
+<script setup lang="ts">
+import { useVueToPrint } from "vue-to-print";
+import { ref } from "vue";
+
+const componentRef = ref();
+const { handlePrint } = useVueToPrint({ content: componentRef });
+</script>
+
+<template>
+  <button @click="handlePrint">Print</button>
+  <div ref="componentRef">
+    <h1>Hello, world!</h1>
+  </div>
+</template>
+```
+
 ### Type Definitions
 
 ```typescript
-declare function useVueToPrint(options: PublicUseVueToPrintProps): { handlePrint: () => void };
+declare function useVueToPrint(
+  options: PublicUseVueToPrintProps
+): { handlePrint: () => void };
 
 // content is required, other props are optional
-declare type PublicUseVueToPrintProps = Partial<Omit<UseVueToPrintProps, "content">> & Pick<UseVueToPrintProps, "content">;
+declare type PublicUseVueToPrintProps = 
+  Partial<Omit<UseVueToPrintProps, "content">>
+  & Pick<UseVueToPrintProps, "content">;
 
 // See above for parameter descriptions
 export interface UseVueToPrintProps {
     bodyClass: MaybeRefOrGetter<string>;
-    content: MaybeRefOrGetter<HTMLElement>;
+    content: MaybeRefOrGetter<HTMLElement | ComponentPublicInstance>;
     copyStyles: MaybeRefOrGetter<boolean>;
     documentTitle: MaybeRefOrGetter<string>;
     fonts: MaybeRefOrGetter<Font[]>;
     onAfterPrint: MaybeRefOrGetter<() => void>;
     onBeforeGetContent: MaybeRefOrGetter<() => void | Promise<void>>;
     onBeforePrint: MaybeRefOrGetter<() => void | Promise<void>>;
-    onPrintError: MaybeRefOrGetter<(errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print", error: Error) => void>;
+    onPrintError: MaybeRefOrGetter<(
+      errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print",
+      error: Error
+    ) => void>;
     pageStyle: MaybeRefOrGetter<string | PropertyFunction<string>>;
     print: MaybeRefOrGetter<(target: HTMLIFrameElement) => Promise<void>>;
     removeAfterPrint: MaybeRefOrGetter<boolean>;

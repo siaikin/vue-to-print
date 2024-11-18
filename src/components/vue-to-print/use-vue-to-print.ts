@@ -1,4 +1,4 @@
-import { type Font, type PublicUseVueToPrintProps, type UseVueToPrintProps } from "./types";
+import { type Font, type PublicUseVueToPrintProps } from "./types";
 import * as ShadowDomSupport from "./supports/shadow-dom";
 import { deepCloneNode } from "./clone-node";
 import { toValue } from "vue";
@@ -157,7 +157,16 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
     const pageStyle = toValue(props.pageStyle);
     const nonce = toValue(props.nonce);
 
-    const contentEl = content;
+    let contentEl: HTMLElement | undefined | null;
+    if (content instanceof HTMLElement) {
+      contentEl = content;
+    } else if (content.$el) {
+      /**
+       * 文本节点或多个元素为根时, $el 是一个文本节点.
+       * @see https://cn.vuejs.org/api/component-instance.html#el
+       */
+      contentEl = content.$el.nodeName === "#text" ? content.$el.parentElement : content.$el;
+    }
 
     if (contentEl === undefined) {
       logMessages([

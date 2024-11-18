@@ -131,7 +131,7 @@ export type InnerVueToPrintProps = ExtractPropTypes<ReturnType<typeof vueToPrint
  */
 export interface UseVueToPrintProps {
   bodyClass: MaybeRefOrGetter<string>;
-  content: MaybeRefOrGetter<HTMLElement>;
+  content: MaybeRefOrGetter<HTMLElement | ComponentPublicInstance>;
   copyStyles: MaybeRefOrGetter<boolean>;
   documentTitle: MaybeRefOrGetter<string>;
   fonts: MaybeRefOrGetter<Font[]>;

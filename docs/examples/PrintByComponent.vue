@@ -1,16 +1,12 @@
 <script setup lang="ts">
-// #region script
 import { VueToPrint } from "vue-to-print";
 import { reactive, ref } from "vue";
 import ComponentToPrint from "./ComponentToPrint.vue";
 
 const componentRef = ref();
 const state = reactive({ text: "old boring text" });
-
-// #endregion script
 </script>
 
-// #region template
 <template>
   <vue-to-print
     :content="componentRef"
@@ -21,10 +17,7 @@ const state = reactive({ text: "old boring text" });
       <ion-button>Print</ion-button>
     </template>
   </vue-to-print>
-  <div ref="componentRef">
-    <component-to-print :text="state.text" />
-  </div>
+  <component-to-print ref="componentRef" :text="state.text" />
 </template>
 
 <style scoped></style>
-// #endregion template

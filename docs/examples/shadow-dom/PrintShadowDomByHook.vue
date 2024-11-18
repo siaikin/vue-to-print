@@ -18,9 +18,7 @@ const { handlePrint } = useVueToPrint({
 // #region template
 <template>
   <ion-button @click="handlePrint">Print</ion-button>
-  <div ref="componentRef">
-    <shadow-dom-to-print :text="state.text" />
-  </div>
+  <shadow-dom-to-print ref="componentRef" :text="state.text" />
 </template>
 
 <style scoped></style>

@@ -6,8 +6,8 @@
 
 |            属性名            | 类型                                                                       | 描述                                                                                                                                                                                                                                         |
 |:-------------------------:|:-------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       **`content`**       | `HTMLElement, ComponentPublicInstance`                                   | 要打印的 DOM 元素。                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |     **`bodyClass?`**      | `string`                                                                 | 一个或多个类名，用空格分隔，传递到打印窗口                                                                                                                                                                                                                      |
-|       **`content`**       | `HTMLElement`                                                            | 要打印的 DOM 元素。                                                                                                                                                                                                                               |
 |     **`copyStyles?`**     | `boolean`                                                                | 将父窗口中`<head>`内的所有`<style>`和`<link type="stylesheet" />`标签复制到打印窗口中。 (默认值: `true`)                                                                                                                                                           |
 |   **`documentTitle?`**    | `string`                                                                 | 在保存为文件时设置打印的标题                                                                                                                                                                                                                             |
 |       **`fonts?`**        | `{ family: string, source: string; weight?: string; style?: string; }[]` | 可以选择提供字体列表，这些字体将加载到打印的 iframe 中。如果使用自定义字体，则这很有用                                                                                                                                                                                            |
@@ -30,25 +30,51 @@
 
 ## useVueToPrint Hook
 
+### 示例
+
+```vue {7}
+<script setup lang="ts">
+import { useVueToPrint } from "vue-to-print";
+import { ref } from "vue";
+
+const componentRef = ref();
+const { handlePrint } = useVueToPrint({ content: componentRef });
+</script>
+
+<template>
+  <button @click="handlePrint">打印</button>
+  <div ref="componentRef">
+    <h1>Hello, world!</h1>
+  </div>
+</template>
+```
+
 ### 类型定义
     
 ```typescript
-declare function useVueToPrint(options: PublicUseVueToPrintProps): { handlePrint: () => void };
+declare function useVueToPrint(
+  options: PublicUseVueToPrintProps
+): { handlePrint: () => void };
 
 // content 参数是必须的，其他参数是可选的
-declare type PublicUseVueToPrintProps = Partial<Omit<UseVueToPrintProps, "content">> & Pick<UseVueToPrintProps, "content">;
+declare type PublicUseVueToPrintProps =
+  Partial<Omit<UseVueToPrintProps, "content">>
+  & Pick<UseVueToPrintProps, "content">;
 
 // 参数说明见上方 VueToPrint Component 参数说明
 export interface UseVueToPrintProps {
     bodyClass: MaybeRefOrGetter<string>;
-    content: MaybeRefOrGetter<HTMLElement>;
+    content: MaybeRefOrGetter<HTMLElement | ComponentPublicInstance>;
     copyStyles: MaybeRefOrGetter<boolean>;
     documentTitle: MaybeRefOrGetter<string>;
     fonts: MaybeRefOrGetter<Font[]>;
     onAfterPrint: MaybeRefOrGetter<() => void>;
     onBeforeGetContent: MaybeRefOrGetter<() => void | Promise<void>>;
     onBeforePrint: MaybeRefOrGetter<() => void | Promise<void>>;
-    onPrintError: MaybeRefOrGetter<(errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print", error: Error) => void>;
+    onPrintError: MaybeRefOrGetter<(
+    errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print",
+    error: Error
+    ) => void>;
     pageStyle: MaybeRefOrGetter<string | PropertyFunction<string>>;
     print: MaybeRefOrGetter<(target: HTMLIFrameElement) => Promise<void>>;
     removeAfterPrint: MaybeRefOrGetter<boolean>;
