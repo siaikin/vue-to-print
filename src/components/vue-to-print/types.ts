@@ -135,12 +135,12 @@ export interface UseVueToPrintProps {
   copyStyles: MaybeRefOrGetter<boolean>;
   documentTitle: MaybeRefOrGetter<string>;
   fonts: MaybeRefOrGetter<Font[]>;
-  onAfterPrint: MaybeRefOrGetter<() => void>;
-  onBeforeGetContent: MaybeRefOrGetter<() => void | Promise<void>>;
-  onBeforePrint: MaybeRefOrGetter<() => void | Promise<void>>;
-  onPrintError: MaybeRefOrGetter<(errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print", error: Error) => void>;
+  onAfterPrint: () => void;
+  onBeforeGetContent: () => void | Promise<void>;
+  onBeforePrint: () => void | Promise<void>;
+  onPrintError: (errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print", error: Error) => void;
   pageStyle: MaybeRefOrGetter<string | PropertyFunction<string>>;
-  print: MaybeRefOrGetter<(target: HTMLIFrameElement) => Promise<void>>;
+  print: (target: HTMLIFrameElement) => void | Promise<void>;
   removeAfterPrint: MaybeRefOrGetter<boolean>;
   suppressErrors: MaybeRefOrGetter<boolean>;
   nonce: MaybeRefOrGetter<string>;

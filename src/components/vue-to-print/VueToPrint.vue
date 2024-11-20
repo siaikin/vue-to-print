@@ -7,7 +7,14 @@ export default defineComponent({
   name: "VueToPrint",
   props: vueToPrintProps(),
   setup(props, { slots, expose }) {
-    const { handlePrint } = useVueToPrint(toRefs(props));
+    const { handlePrint } = useVueToPrint({
+      ...toRefs(props),
+      onAfterPrint: props.onAfterPrint,
+      onBeforePrint: props.onBeforePrint,
+      onBeforeGetContent: props.onBeforeGetContent,
+      onPrintError: props.onPrintError,
+      print: props.print,
+    });
 
     expose({ handlePrint });
     return () => {

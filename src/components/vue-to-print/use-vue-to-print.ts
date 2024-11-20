@@ -1,7 +1,7 @@
 import { type Font, type PublicUseVueToPrintProps } from "./types";
 import * as ShadowDomSupport from "./supports/shadow-dom";
 import { deepCloneNode } from "./clone-node";
-import { toValue } from "vue";
+import { isRef, toValue } from "vue";
 
 /**
  * The default props in Vue are set within vueToPrintProps too.
@@ -35,9 +35,9 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
   let resourcesErrored: (Element | Font | FontFace)[] = [];
 
   const startPrint = (target: HTMLIFrameElement) => {
-    const onAfterPrint = toValue(props.onAfterPrint);
-    const onPrintError = toValue(props.onPrintError);
-    const print = toValue(props.print);
+    const onAfterPrint = props.onAfterPrint;
+    const onPrintError = props.onPrintError;
+    const print = props.print;
     const documentTitle = toValue(props.documentTitle);
 
     // Some browsers such as Safari don't always behave well without this timeout
@@ -46,7 +46,7 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
         target.contentWindow.focus(); // Needed for IE 11
 
         if (print) {
-          print(target)
+          Promise.resolve(print(target))
             .then(() => onAfterPrint?.())
             .then(() => handleRemoveIframe())
             .catch((error: Error) => {
@@ -105,8 +105,8 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
   };
 
   const triggerPrint = (target: HTMLIFrameElement) => {
-    const onBeforePrint = toValue(props.onBeforePrint);
-    const onPrintError = toValue(props.onPrintError);
+    const onBeforePrint = props.onBeforePrint;
+    const onPrintError = props.onPrintError;
 
     if (onBeforePrint) {
       const onBeforePrintOutput = onBeforePrint();
@@ -129,8 +129,8 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
   };
 
   const handleClick = () => {
-    const onBeforeGetContent = toValue(props.onBeforeGetContent);
-    const onPrintError = toValue(props.onPrintError);
+    const onBeforeGetContent = props.onBeforeGetContent;
+    const onPrintError = props.onPrintError;
 
     if (onBeforeGetContent) {
       const onBeforeGetContentOutput = onBeforeGetContent();
