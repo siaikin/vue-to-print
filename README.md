@@ -22,7 +22,7 @@ VueToPrint aims to be as consistent as possible with ReactToPrint so that you ca
 
 ### Example
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/vitejs-vite-32bxkk?file=src%2Fcomponents%2FComponentToPrint.vue)
+[![Edit vite-vue-typescript-starter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/github/siaikin/vue-to-print-example?embed=1)
 
 ## Thanks
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
