@@ -141,6 +141,15 @@ onMounted(() => {
             ></video>
           </td>
         </tr>
+        <tr>
+          <td>Broken Image</td>
+          <td>
+            <img
+              src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+              width="200"
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

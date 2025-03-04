@@ -1,7 +1,7 @@
 import { type Font, type PublicUseVueToPrintProps } from "./types";
 import * as ShadowDomSupport from "./supports/shadow-dom";
 import { deepCloneNode } from "./clone-node";
-import { isRef, toValue } from "vue";
+import { toValue } from "vue";
 
 /**
  * The default props in Vue are set within vueToPrintProps too.
@@ -202,8 +202,17 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
       return;
     }
 
-    // React components can return a bare string as a valid JSX response
-    const clonedContentNodes = await deepCloneNode(contentNodes);
+    /**
+     * Allow printing to continue even if some resources fail to load (e.g. bad image URLs, invalid fonts, etc.)
+     */
+    const { node: clonedContentNodes, result } = await deepCloneNode(contentNodes);
+    for (const promise of result) {
+      if (promise.status === 'fulfilled') continue;
+      logMessages([
+        `An error occurred while cloning the content to print. Printing will continue, but some content may be missing.`,
+        `Error: ${promise.reason}`,
+      ], "warning")
+    }
     // const isText = clonedContentNodes instanceof Text;
 
     const globalStyleLinkNodes = document.querySelectorAll("link[rel~='stylesheet']");
@@ -416,7 +425,8 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
   };
 
   const handleRemoveIframe = (force?: boolean) => {
-    const { removeAfterPrint } = props;
+    const removeAfterPrint = toValue(props.removeAfterPrint);
+
 
     if (force || removeAfterPrint) {
       // The user may have removed the iframe in `onAfterPrint`
@@ -428,7 +438,7 @@ export function useVueToPrint(props: PublicUseVueToPrintProps) {
   };
 
   const logMessages = (messages: unknown[], level: "error" | "warning" | "debug" = "error") => {
-    const { suppressErrors } = props;
+    const suppressErrors = toValue(props.suppressErrors);
 
     if (!suppressErrors) {
       if (level === "error") {
