@@ -94,6 +94,16 @@ export default defineConfig({
       }
     }
   },
+  head: [
+    [
+      "script",
+      {
+        defer: "true",
+        src: "https://cloud.umami.is/script.js",
+        "data-website-id": "e03ed427-d6c1-4c51-8070-7db0cec753c4"
+      }
+      ],
+  ],
   vite: {
     plugins: [
       //@ts-ignore
