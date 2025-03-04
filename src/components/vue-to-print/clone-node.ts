@@ -105,7 +105,7 @@ function getChildNodes(dom: Node): Array<Node> {
   }
 }
 
-export async function deepCloneNode(dom: Node): Promise<Node> {
+export async function deepCloneNode(dom: Node): Promise<{ node: Node; result: PromiseSettledResult<void>[]}> {
   const cloneMap = new Map<Node, Node>();
   const waitList: Array<Promise<void>> = [];
 
@@ -140,7 +140,5 @@ export async function deepCloneNode(dom: Node): Promise<Node> {
     }
   }
 
-  await Promise.all(waitList);
-
-  return root;
+  return { node: root, result: await Promise.allSettled(waitList) };
 }
