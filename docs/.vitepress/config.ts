@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { fileURLToPath } from "node:url";
+import llmstxt from 'vitepress-plugin-llms'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -107,7 +108,9 @@ export default defineConfig({
   vite: {
     plugins: [
       //@ts-ignore
-      vueJsx()
+      vueJsx(),
+      //@ts-ignore
+      llmstxt()
     ],
     resolve: {
       alias: {
