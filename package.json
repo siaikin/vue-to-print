@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "vue-to-print",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A Vue 3 component to print the content of an element or a component.",
   "scripts": {
     "dev": "vite",
