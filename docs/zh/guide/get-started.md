@@ -50,3 +50,16 @@ const { handlePrint } = useVueToPrint({
 ## 在线示例
 
 [![Edit vite-vue-typescript-starter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/github/siaikin/vue-to-print-example?embed=1)
+
+## AI 助手集成
+
+对于使用 AI 编程助手（如 ChatGPT、Claude、GitHub Copilot 等）的用户，您可以通过分享我们的文档文件来为您的 AI 助手提供全面的项目信息：
+
+**📋 快速参考：** [https://vue-to-print.netlify.app/llms.txt](https://vue-to-print.netlify.app/llms.txt)
+- 简洁的概述和文档链接
+
+**📚 完整文档：** [https://vue-to-print.netlify.app/llms-full.txt](https://vue-to-print.netlify.app/llms-full.txt)  
+- 完整的 API 文档和示例
+- 推荐用于详细的实现帮助
+
+只需与您的 AI 助手分享适当的 URL，即可帮助它们更好地理解 vue-to-print 库，并为您的实现提供更准确的帮助。

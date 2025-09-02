@@ -51,3 +51,16 @@ const { handlePrint } = useVueToPrint({
 ## Online Example
 
 [![Edit vite-vue-typescript-starter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/github/siaikin/vue-to-print-example?embed=1)
+
+## AI Assistant Integration
+
+For users working with AI programming assistants (like ChatGPT, Claude, GitHub Copilot, etc.), you can provide the comprehensive project information to your AI assistant by sharing our documentation files:
+
+**📋 Quick Reference:** [https://vue-to-print.netlify.app/llms.txt](https://vue-to-print.netlify.app/llms.txt)
+- Compact overview with documentation links
+
+**📚 Complete Documentation:** [https://vue-to-print.netlify.app/llms-full.txt](https://vue-to-print.netlify.app/llms-full.txt)  
+- Full API documentation with examples
+- Recommended for detailed implementation help
+
+Simply share the appropriate URL with your AI assistant to help them better understand the vue-to-print library and provide more accurate assistance with your implementation.

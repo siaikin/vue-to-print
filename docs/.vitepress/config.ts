@@ -110,11 +110,16 @@ export default defineConfig({
       //@ts-ignore
       vueJsx(),
       //@ts-ignore
-      llmstxt()
+      llmstxt({
+        domain: "https://vue-to-print.netlify.app",
+        ignoreFiles: [
+          'zh/**',
+        ]
+      })
     ],
     resolve: {
       alias: {
-        "vue-to-print": fileURLToPath(new URL("../../src/main", import.meta.url))
+        "vue-to-print": fileURLToPath(new URL("../../src/main", import.meta.url)),
       }
     }
   }
