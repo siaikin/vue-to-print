@@ -1,0 +1,5 @@
+[[redirects]]
+from = "/*"
+to = "https://vue-to-print.siaikin.website"
+status = 301
+force = true

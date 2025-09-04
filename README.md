@@ -18,7 +18,7 @@ VueToPrint aims to be as consistent as possible with ReactToPrint so that you ca
 
 ## Documentation
 
-- [Online Documentation](https://vue-to-print.netlify.app/)
+- [Online Documentation](https://vue-to-print.siaikin.website/)
 
 ### Example
 

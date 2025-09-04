@@ -111,7 +111,7 @@ export default defineConfig({
       vueJsx(),
       //@ts-ignore
       llmstxt({
-        domain: "https://vue-to-print.netlify.app",
+        domain: "https://vue-to-print.siaikin.website",
         ignoreFiles: [
           'zh/**',
         ]

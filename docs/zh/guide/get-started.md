@@ -55,10 +55,10 @@ const { handlePrint } = useVueToPrint({
 
 对于使用 AI 编程助手（如 ChatGPT、Claude、GitHub Copilot 等）的用户，您可以通过分享我们的文档文件来为您的 AI 助手提供全面的项目信息：
 
-**📋 快速参考：** [https://vue-to-print.netlify.app/llms.txt](https://vue-to-print.netlify.app/llms.txt)
+**📋 快速参考：** [https://vue-to-print.siaikin.website/llms.txt](https://vue-to-print.siaikin.website/llms.txt)
 - 简洁的概述和文档链接
 
-**📚 完整文档：** [https://vue-to-print.netlify.app/llms-full.txt](https://vue-to-print.netlify.app/llms-full.txt)  
+**📚 完整文档：** [https://vue-to-print.siaikin.website/llms-full.txt](https://vue-to-print.siaikin.website/llms-full.txt)  
 - 完整的 API 文档和示例
 - 推荐用于详细的实现帮助
 
